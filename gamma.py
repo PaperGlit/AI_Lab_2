@@ -15,21 +15,29 @@ def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
         print("There are no active links in letters")
         return
 
-    increment1 = False if u_ar1 >= threshold else True
-    increment2 = False if u_ar2 > threshold else True
+    increment = False if u_ar1 >= threshold else True
 
+    w = 0
     iteration = 1
-    while (((u_ar1 <= threshold and increment1) or (u_ar1 >= threshold and not increment1)) or
-           ((u_ar2 <= threshold and increment2) or (u_ar2 >= threshold and not increment2))):
+    while (((u_ar1 <= threshold and increment) or (u_ar1 >= threshold and not increment)) or
+           ((u_ar2 <= threshold and not increment) or (u_ar2 >= threshold and increment))):
         if iteration % 2 == 1:
-            wp = (na1 * 0.1) / n
-            wa = 0.1 - wp
-            n, na1 = gamma_subfunction(array_ar, letter_ar1, increment1, n, na1, wp, wa)
+            if increment:
+                wp = -1 * ((na1 * 0.1 + w) / n)
+                wa = 0.1 + wp
+            else:
+                wp = (na1 * 0.1 + w) / n
+                wa = -1 * (0.1 - wp)
+            n, na1, w = gamma_subfunction(array_ar, letter_ar1, n, na1, wp, wa)
             u_ar1 = find_u(letter_ar1, array_ar)
         else:
-            wp = (na2 * 0.1) / n
-            wa = 0.1 - wp
-            n, na2 = gamma_subfunction(array_ar, letter_ar2, increment2, n, na2, wp, wa)
+            if not increment:
+                wp = -1 * ((na2 * 0.1 + w) / n)
+                wa = 0.1 + wp
+            else:
+                wp = (na2 * 0.1 + w) / n
+                wa = -1 * (0.1 - wp)
+            n, na2, w = gamma_subfunction(array_ar, letter_ar2, n, na2, wp, wa)
             u_ar2 = find_u(letter_ar2, array_ar)
         iteration += 1
 
