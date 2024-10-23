@@ -9,7 +9,6 @@ from find_letter_ar import find_letter_ar
 from find_threshold_value import find_threshold_value
 
 
-
 def main():
     if len(letter1) != len(letter2):
         raise ValueError("Letters must have same length")
@@ -39,15 +38,7 @@ def main():
           f"Threshold for AR array: {threshold_ar}\n")
 
     print("Alpha function:")
-    alpha(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold_ar)
+    alpha(array_ar.copy(), letter_ar1.copy(), letter_ar2.copy(), u_ar1, u_ar2, threshold_ar)
 
-
-    # test_array1 = [0.1, 0.7, 0.1, 0.9, 0.7, 0.9, 0.6, 0.1, 0.6, 0.5]
-    # test_array2 = [1, 1, 0, 1, 0, 1, 1, 1, 0, 1]
-    # test_array3 = [1, 1, 0, 1, 1, 0, 0, 1, 0, 0]
-    # test_u1 = 3.8
-    # test_u2 = 2.5
-    # test_threshold = 3.2
     print("Gamma function:")
-    #gamma(test_array1, test_array2, test_array3, test_u1, test_u2, test_threshold)
     gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold_ar)

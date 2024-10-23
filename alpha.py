@@ -6,15 +6,16 @@ def alpha(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
     increment = True if u_ar1 < threshold else False
     u_sum = round(u_ar1 + u_ar2, 1)
     counter = 1
-    while (((u_ar1 <= threshold and increment) or (u_ar1 >= threshold and not increment)) or
-           ((u_ar2 <= threshold and not increment) or (u_ar2 >= threshold and increment))):
-        if counter % 2 == 1:
+    while (((u_ar1 < threshold and increment) or (u_ar1 >= threshold and not increment)) or
+           ((u_ar2 < threshold and not increment) or (u_ar2 >= threshold and increment))):
+        if (u_ar1 <= threshold and increment) or (u_ar1 >= threshold and not increment):
             print(f"Iteration number: {counter}. First cycle")
             if increment:
                 alpha_subfunction(array_ar, letter_ar1, 0.1)
             else:
                 alpha_subfunction(array_ar, letter_ar1, -0.1)
-        else:
+        elif (u_ar2 <= threshold and not increment) or (u_ar2 >= threshold and increment):
+            print(f"Iteration number: {counter}. Second cycle")
             if increment:
                 alpha_subfunction(array_ar, letter_ar2, -0.1)
             else:

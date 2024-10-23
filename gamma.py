@@ -1,6 +1,7 @@
 from gamma_subfunction import gamma_subfunction
 from check_na import check_na
 from find_u import find_u
+from find_w import find_w
 
 
 def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
@@ -21,23 +22,13 @@ def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
         if counter % 2 == 1:
             print(f"Iteration number: {counter}. First cycle")
             na1 = check_na(array_ar, letter_ar1)
-            if increment:
-                wp = (na1 * 0.1 + w) / n
-                wa = -1 * (0.1 * wp)
-            else:
-                wp = -1 * (na1 * 0.1 + w) / n
-                wa = 0.1 - (-1 * wp)
-            n, w = gamma_subfunction(array_ar, letter_ar1, n, wp, wa)
+            wp, wa = find_w(n, na1, w, increment)
+            n, w = gamma_subfunction(array_ar, letter_ar1, n, wa, wp)
         else:
             print(f"Iteration number: {counter}. Second cycle")
             na2 = check_na(array_ar, letter_ar2)
-            if increment:
-                wp = -1 * (na2 * 0.1 + w) / n
-                wa = 0.1 - (-1 * wp)
-            else:
-                wp = (na2 * 0.1 + w) / n
-                wa = -1 * (0.1 - wp)
-            n, w = gamma_subfunction(array_ar, letter_ar2, n, wp, wa)
+            wp, wa = find_w(n, na2, w, not increment)
+            n, w = gamma_subfunction(array_ar, letter_ar2, n, wa, wp)
         u_ar1 = find_u(letter_ar1, array_ar)
         u_ar2 = find_u(letter_ar2, array_ar)
         u_sum = round(u_ar1 + u_ar2, 1)
@@ -45,6 +36,9 @@ def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
         if counter == 100:
             print("Gamma function can not be found for this instance")
             return
+
+    for i in range(len(array_ar)):
+       array_ar[i] = round(array_ar[i], 3)
 
     print(f"Final weight values: {u_ar1}, {u_ar2}\n"
           f"Total sum: {u_sum}\n"
