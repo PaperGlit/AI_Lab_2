@@ -1,32 +1,33 @@
-def alpha(array_ar, picture_ar, u_ar, threshold):
-    if u_ar > threshold:
-        increment = False
-    else:
-        increment = True
+from find_u import find_u
+from alpha_subfunction import alpha_subfunction
 
-    array_normalized = []
-    for i in range(len(array_ar)):
-        if picture_ar[i] == 1:
-            array_normalized.append(array_ar[i])
-        else:
-            array_normalized.append(0)
 
+def alpha(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
+    increment = True if u_ar1 < threshold else False
+    u_sum = round(u_ar1 + u_ar2, 1)
     counter = 1
-    while u_ar <= threshold and increment or u_ar >= threshold and not increment:
-        if counter > 100:
+    while (((u_ar1 <= threshold and increment) or (u_ar1 >= threshold and not increment)) or
+           ((u_ar2 <= threshold and not increment) or (u_ar2 >= threshold and increment))):
+        if counter % 2 == 1:
+            print(f"Iteration number: {counter}. First cycle")
+            if increment:
+                alpha_subfunction(array_ar, letter_ar1, 0.1)
+            else:
+                alpha_subfunction(array_ar, letter_ar1, -0.1)
+        else:
+            if increment:
+                alpha_subfunction(array_ar, letter_ar2, -0.1)
+            else:
+                alpha_subfunction(array_ar, letter_ar2, 0.1)
+        u_ar1 = find_u(letter_ar1, array_ar)
+        u_ar2 = find_u(letter_ar2, array_ar)
+        u_sum = round(u_ar1 + u_ar2, 1)
+        counter += 1
+        if counter == 100:
             print("Alpha function can not be found for this instance\n")
             return
-        for i in range(len(array_normalized)):
-            if increment:
-                if array_normalized[i]!= 1 and array_normalized[i] != 0:
-                    array_normalized[i] += 0.1
-            else:
-                if array_normalized[i] != 0:
-                    array_normalized[i] -= 0.1
-            array_normalized[i] = round(array_normalized[i], 1)
-        u_ar = sum(array_normalized)
-        counter += 1
 
-    print(f"Final weight value: {round(u_ar, 1)}\n"
-          f"Cycles spent: {counter}\n"
-          f"Final array: {array_normalized}\n")
+    print(f"Final weight values: {u_ar1}, {u_ar2}\n"
+          f"Total sum: {u_sum}\n"
+          f"Iterations spent: {counter - 1}\n"
+          f"Final array: {array_ar}\n")

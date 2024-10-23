@@ -1,4 +1,5 @@
 from alpha import alpha
+from gamma import gamma
 from find_u import find_u
 from GlobalVariables import *
 from create_array import create_array
@@ -6,7 +7,7 @@ from create_matrix import create_matrix
 from create_array_u import create_array_u
 from find_letter_ar import find_letter_ar
 from find_threshold_value import find_threshold_value
-from gamma import gamma
+
 
 
 def main():
@@ -37,19 +38,16 @@ def main():
           f"AR array weighted for the second letter: {u_ar2}\n"
           f"Threshold for AR array: {threshold_ar}\n")
 
-    print("Alpha function:\n"
-          "First letter:")
-    alpha(array_ar, letter_ar1, u_ar1, threshold_ar)
-    print("Second letter:")
-    alpha(array_ar, letter_ar2, u_ar2, threshold_ar)
+    print("Alpha function:")
+    alpha(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold_ar)
 
 
-    test_array1 = [0.2, 0.8, 0.6, 0.9, 0.8, 0.1]
-    test_array2 = [1, 1, 1, 1, 0, 0]
-    test_array3 = [0, 0, 0, 0, 1, 1]
-    test_u1 = 2.5
-    test_u2 = 0.9
-    test_threshold = 1.7
+    # test_array1 = [0.1, 0.7, 0.1, 0.9, 0.7, 0.9, 0.6, 0.1, 0.6, 0.5]
+    # test_array2 = [1, 1, 0, 1, 0, 1, 1, 1, 0, 1]
+    # test_array3 = [1, 1, 0, 1, 1, 0, 0, 1, 0, 0]
+    # test_u1 = 3.8
+    # test_u2 = 2.5
+    # test_threshold = 3.2
     print("Gamma function:")
-    gamma(test_array1, test_array2, test_array3, test_u1, test_u2, test_threshold)
-    #gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold_ar)
+    #gamma(test_array1, test_array2, test_array3, test_u1, test_u2, test_threshold)
+    gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold_ar)
