@@ -35,7 +35,7 @@ def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
         counter += 1
         if counter == 100:
             print("Gamma function can not be found for this instance")
-            return
+            return []
 
     for i in range(len(array_ar)):
        array_ar[i] = round(array_ar[i], 3)
@@ -44,3 +44,5 @@ def gamma(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
           f"Total sum: {u_sum}\n"
           f"Iterations spent: {counter - 1}\n"
           f"Final array: {array_ar}\n")
+
+    return array_ar

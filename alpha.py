@@ -26,9 +26,11 @@ def alpha(array_ar, letter_ar1, letter_ar2, u_ar1, u_ar2, threshold):
         counter += 1
         if counter == 100:
             print("Alpha function can not be found for this instance\n")
-            return
+            return []
 
     print(f"Final weight values: {u_ar1}, {u_ar2}\n"
           f"Total sum: {u_sum}\n"
           f"Iterations spent: {counter - 1}\n"
           f"Final array: {array_ar}\n")
+
+    return array_ar
